@@ -1,2 +1,9 @@
-# Project exclude paths
+# Directories #
+###############
 /out/
+/.idea/
+
+# File Types #
+##############
+*.dat
+*.json
