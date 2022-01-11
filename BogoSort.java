@@ -5,7 +5,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * The type Bogo sort.
+ * The BogoSort class contains functions for randomly sorting an int[], with the added (and really useless)
+ * function of multithreading! Now you can BogoSort on multiple threads! (WIP)
+ * 
+ * @author samminhch
+ * @since 2021
  */
 public class BogoSort implements Runnable {
     private final int threadNum;
@@ -23,6 +27,7 @@ public class BogoSort implements Runnable {
 
     /**
      * Sorts the array.
+     * 
      * @return the number of shuffles it took to sort the array.
      */
     public int sort() {
@@ -35,6 +40,9 @@ public class BogoSort implements Runnable {
     }
 
     @Override
+    /**
+     * Runs a thread to sort <code>nums</code>
+     */
     public void run() {
         long startTime = System.nanoTime();
         System.out.printf("""
@@ -45,6 +53,11 @@ public class BogoSort implements Runnable {
         );
     }
 
+    /**
+     * Checks if <code>nums</code> is sorted in ascending order.
+     * 
+     * @return a boolean indicating whether <code>nums</code> is sorted
+     */
     private boolean isSortedAscended() {
         for (int i = 1; i < nums.length; i++)
             if (nums[i - 1] > nums[i])
@@ -52,6 +65,11 @@ public class BogoSort implements Runnable {
         return true;
     }
 
+    /**
+     * This funciton is just used to test debug multithreading.
+     * 
+     * @param args command-line arguments.
+     */
     public static void main(String[] args) {
         int[] arr;
         int resp, numThreads;
