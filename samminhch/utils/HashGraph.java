@@ -18,7 +18,13 @@ public class HashGraph <T> implements Graph <T> {
         path = new ArrayList<>();
     }
 
+    /*
+     * PUBLIC METHODS
+     */
+
     /**
+     * Get the vertices in the graph.
+     *
      * @return <code>T[]</code>- All the vertices in the graph.
      */
     @Override
@@ -27,6 +33,8 @@ public class HashGraph <T> implements Graph <T> {
     }
 
     /**
+     * Get all the vertices a vertex is connected to.
+     *
      * @param object the object that's getting accessed.
      * @return <code>T[]</code>- all connections the given vertex has.
      * @throws IllegalArgumentException if specified vertex does not exist.
@@ -38,26 +46,16 @@ public class HashGraph <T> implements Graph <T> {
     }
 
     /**
-     * Connects one vertex to another.
+     * Connects the first vertex to the second vertex.
+     *
      * @param object1 the object that's getting connected.
      * @param object2 the object that object1 is getting connected to.
      */
     @Override
-    public void connect(T object1, T object2) {
+    public boolean connect(T object1, T object2) {
         if (!(data.containsKey(object2) || data.containsKey(object1)))
-            return;
+            return false;
         data.get(object1).add(object2);
-    }
-
-    /**
-     * Connects one vertex to another bidirectionally.
-     * @param object1 the object that's getting connected to object2.
-     * @param object2 the object that's getting connected to object1.
-     * @return <code>boolean</code> if the connection was successful.
-     */
-    public boolean biConnect(T object1, T object2) {
-        connect(object1, object2);
-        connect(object2, object1);
         return true;
     }
 
@@ -127,6 +125,7 @@ public class HashGraph <T> implements Graph <T> {
      */
 
     /**
+     * Check if given vertex is located inside the graph or not.
      * @param object the object that's getting checked.
      * @throws IllegalArgumentException if object isn't in the Graph.
      */
@@ -143,12 +142,13 @@ public class HashGraph <T> implements Graph <T> {
     private void checkConnection(T object1, T object2) {
         if (data.get(object1).contains(object2))
             flag = true;
-        else
+        else {
             for (T connection : data.get(object1)) {
                 if (!path.contains(connection)) {
                     path.add(connection);
                     connects(connection, object2);
                 }
             }
+        }
     }
 }

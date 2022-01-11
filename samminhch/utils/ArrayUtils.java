@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 /**
  * This class adds more methods for arrays that I think that the Arrays class doesn't have. They're for your convenience.
+ *
+ * @author samminhch
+ * @since 2019
  */
 public class ArrayUtils {
 
