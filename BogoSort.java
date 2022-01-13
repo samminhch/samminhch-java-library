@@ -31,10 +31,10 @@ public class BogoSort implements Runnable {
      *
      * @return the number of shuffles it took to sort the array.
      */
-    public int sort() {
+    public int sort(int[] arr) {
         int numShuffles = 0;
-        while (!isSortedAscended()) {
-            ArrayUtils.shuffle(nums, 1);
+        while (!isSortedAscended(arr)) {
+            ArrayUtils.shuffle(arr, 1);
             numShuffles++;
         }
         return numShuffles;
@@ -45,9 +45,9 @@ public class BogoSort implements Runnable {
      *
      * @return a boolean indicating whether <code>nums</code> is sorted
      */
-    private boolean isSortedAscended() {
-        for (int i = 1; i < nums.length; i++)
-            if (nums[i - 1] > nums[i])
+    private boolean isSortedAscended(int[] arr) {
+        for (int i = 1; i < arr.length; i++)
+            if (arr[i - 1] > arr[i])
                 return false;
         return true;
     }
@@ -64,7 +64,7 @@ public class BogoSort implements Runnable {
                 From Thread %-3d:
                 \tIt took %s shuffles and %.4g seconds to sort the array.
                 \tSorted array: %s
-                """, threadNum, sort(), (System.nanoTime() - startTime) / Math.pow(10, 9), Arrays.toString(nums)
+                """, threadNum, sort(nums.clone()), (System.nanoTime() - startTime) / Math.pow(10, 9), Arrays.toString(nums)
         );
     }
 
@@ -113,10 +113,10 @@ public class BogoSort implements Runnable {
         Arrays.sort(temp);
         System.out.printf("Sorted Array: %s\n", Arrays.toString(temp));
 
+        // TODO: make array list of threads, run all of them at once. kill all threads when first one finishes
+        ArrayList<Thread> threads = new ArrayList<>();
         for (int i = 0; i < numThreads; i++) {
-            BogoSort bogoSort = new BogoSort(arr, i);
-            Thread thread = new Thread(bogoSort);
-            thread.start();
+
         }
     }
 }

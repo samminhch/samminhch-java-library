@@ -15,5 +15,7 @@ public class Test {
         graph.add(3);
         graph.connect(1, 2);
         graph.biConnect(2, 3);
+        System.out.println(graph.toString());
+        
     }
 }
